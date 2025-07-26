@@ -129,7 +129,9 @@ export default function EscaleroApp() {
   }
 
   const getPlayerTotal = (player: Player): number => {
-    return Object.values(player.scores).reduce((sum, score) => sum + (score || 0), 0)
+    return Object.values(player.scores)
+      .filter((score): score is number => score !== null)
+      .reduce((sum, score) => sum + score, 0)
   }
 
   const addPlayer = () => {
