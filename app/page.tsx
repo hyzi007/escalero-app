@@ -469,7 +469,7 @@ export default function EscaleroApp() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">2️⃣</span>
-                  <span>Vyberte <strong>"Přidat na plochu"</strong> 📱</span>
+                  <span>Vyberte <strong>&ldquo;Přidat na plochu&rdquo;</strong> 📱</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">3️⃣</span>
