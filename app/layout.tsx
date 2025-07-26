@@ -9,15 +9,23 @@ export const metadata: Metadata = {
   description: 'Digital score keeping for Escalero dice game',
   manifest: '/manifest.json',
   themeColor: '#3B82F6',
-  viewport: 'width=device-width, initial-scale=1, user-scalable=no',
+  viewport: 'width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'Escalero',
+    startupImage: [
+      '/icon-192x192.png',
+    ],
   },
   icons: {
-    icon: '/icon-192x192.png',
-    apple: '/icon-192x192.png',
+    icon: [
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
   },
 }
 
@@ -29,12 +37,21 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <head>
+        {/* PWA Meta Tags */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Escalero" />
-        <link rel="icon" type="image/png" href="/icon-192x192.png" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <meta name="format-detection" content="telephone=no" />
+        
+        {/* Icons */}
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/icon-192x192.png" />
+        <link rel="apple-touch-startup-image" href="/icon-192x192.png" />
+        
+        {/* Manifest */}
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
         {children}

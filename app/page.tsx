@@ -89,6 +89,18 @@ export default function EscaleroApp() {
   const [scoreDialog, setScoreDialog] = useState<ScoreDialog | null>(null)
   const [scoreAnimation, setScoreAnimation] = useState<string | null>(null)
   const [historyDialog, setHistoryDialog] = useState<Game | null>(null)
+  const [showIOSInstall, setShowIOSInstall] = useState(false)
+
+  // Check if iOS Safari
+  useEffect(() => {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+    const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+    const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+    
+    if (isIOS && isSafari && !isInStandaloneMode) {
+      setShowIOSInstall(true)
+    }
+  }, [])
 
   const playerColors = [
     'from-blue-500 to-purple-600',
@@ -426,6 +438,51 @@ export default function EscaleroApp() {
             )}
           </div>
         </div>
+
+        {/* iOS Install Prompt */}
+        {showIOSInstall && (
+          <div className="fixed bottom-4 left-4 right-4 z-50">
+            <div className={`backdrop-blur-xl rounded-2xl p-6 border shadow-2xl ${
+              isDarkMode ? 'bg-blue-500/20 border-blue-400/30' : 'bg-blue-500/20 border-blue-400/30'
+            }`}>
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                    📱 Nainstalujte Escalero
+                  </h3>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                    Pro lepší zážitek přidejte aplikaci na plochu
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowIOSInstall(false)}
+                  className={`p-2 rounded-lg ${isDarkMode ? 'hover:bg-white/10' : 'hover:bg-black/10'}`}
+                >
+                  <X size={20} className={isDarkMode ? 'text-white' : 'text-gray-800'} />
+                </button>
+              </div>
+              
+              <div className={`text-sm space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xl">1️⃣</span>
+                  <span>Klikněte na tlačítko <strong>Sdílet</strong> 📤</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xl">2️⃣</span>
+                  <span>Vyberte <strong>"Přidat na plochu"</strong> 📱</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-xl">3️⃣</span>
+                  <span>Potvrďte přidání aplikace ✅</span>
+                </div>
+              </div>
+              
+              <div className="mt-4 text-center">
+                <span className="text-2xl animate-bounce">⬇️ Tlačítko Sdílet ⬇️</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* History Dialog */}
         {historyDialog && (
