@@ -448,10 +448,10 @@ export default function EscaleroApp() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                    📱 Nainstalujte Escalero
+                    📱 Install Escalero
                   </h3>
                   <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    Pro lepší zážitek přidejte aplikaci na plochu
+                    Add this app to your home screen for better experience
                   </p>
                 </div>
                 <button
@@ -465,20 +465,20 @@ export default function EscaleroApp() {
               <div className={`text-sm space-y-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">1️⃣</span>
-                  <span>Klikněte na tlačítko <strong>Sdílet</strong> 📤</span>
+                  <span>Tap the <strong>Share</strong> button 📤</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">2️⃣</span>
-                  <span>Vyberte <strong>&ldquo;Přidat na plochu&rdquo;</strong> 📱</span>
+                  <span>Select <strong>&ldquo;Add to Home Screen&rdquo;</strong> 📱</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">3️⃣</span>
-                  <span>Potvrďte přidání aplikace ✅</span>
+                  <span>Confirm to add the app ✅</span>
                 </div>
               </div>
               
               <div className="mt-4 text-center">
-                <span className="text-2xl animate-bounce">⬇️ Tlačítko Sdílet ⬇️</span>
+                <span className="text-2xl animate-bounce">⬇️ Share Button ⬇️</span>
               </div>
             </div>
           </div>
@@ -983,16 +983,16 @@ export default function EscaleroApp() {
         )}
 
         {/* Game Table */}
-        <div className="p-4 overflow-x-auto">
-          <div className="flex gap-3 min-w-fit">
+        <div className="p-2 overflow-x-auto">
+          <div className="flex gap-1 min-w-fit">
             {/* Categories Column */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1">
               {/* Empty header space */}
-              <div className="h-24"></div>
+              <div className="h-16"></div>
               
               {/* Category labels */}
               {categories.map(category => (
-                <div key={category.key} className={`flex items-center justify-center px-4 rounded-lg font-semibold backdrop-blur-md border w-[140px] h-[70px] text-lg ${
+                <div key={category.key} className={`flex items-center justify-center px-2 rounded-lg font-semibold backdrop-blur-md border w-[100px] h-[50px] text-sm ${
                   isDarkMode ? 'bg-white/10 border-white/20 text-white' : 'bg-black/10 border-black/20 text-gray-800'
                 }`}>
                   {category.name}
@@ -1002,16 +1002,16 @@ export default function EscaleroApp() {
 
             {/* Player Columns */}
             {currentGame.players.map((player, playerIndex) => (
-              <div key={player.id} className="flex flex-col gap-3">
+              <div key={player.id} className="flex flex-col gap-1">
                 {/* Player Header with Total */}
-                <div className={`text-center backdrop-blur-md rounded-lg p-3 border w-[140px] h-24 flex flex-col items-center justify-center ${
+                <div className={`text-center backdrop-blur-md rounded-lg p-2 border w-[100px] h-16 flex flex-col items-center justify-center ${
                   isDarkMode ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
                 }`}>
-                  <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${player.color} mb-1`}></div>
-                  <div className={`font-semibold text-sm ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                    {player.name}
+                  <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${player.color} mb-1`}></div>
+                  <div className={`font-semibold text-xs ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                    {player.name.length > 8 ? player.name.substring(0, 8) + '...' : player.name}
                   </div>
-                  <div className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                  <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
                     <AnimatedCounter value={getPlayerTotal(player)} />
                   </div>
                 </div>
@@ -1021,7 +1021,7 @@ export default function EscaleroApp() {
                   <button
                     key={`${category.key}-${player.id}`}
                     onClick={() => openScoreDialog(category, playerIndex)}
-                    className={`rounded-lg text-center font-semibold backdrop-blur-md border transition-all duration-300 w-[140px] h-[70px] flex items-center justify-center text-lg transform hover:scale-105 ${
+                    className={`rounded-lg text-center font-semibold backdrop-blur-md border transition-all duration-300 w-[100px] h-[50px] flex items-center justify-center text-sm transform hover:scale-105 ${
                       scoreAnimation === `${category.key}-${playerIndex}` 
                         ? `animate-bounce scale-110 ${isDarkMode ? 'bg-blue-400/40 border-blue-300/50' : 'bg-blue-500/40 border-blue-600/50'}`
                         : ''
