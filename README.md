@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎲 Escalero Playing Book
 
-## Getting Started
+Modern digital score keeping application for Escalero dice game built with Next.js, React, and Tailwind CSS.
 
-First, run the development server:
+## ✨ Features
+
+- 🎮 **Complete Game Management** - Add players, track scores, game history
+- 📱 **PWA Ready** - Install as native app on mobile devices
+- 🎨 **Modern UI** - Glassmorphism effects, dark/light theme
+- 🔄 **Animated Scoring** - Smooth counter animations and visual feedback
+- 📊 **Smart History** - Resume incomplete games, replay completed ones
+- 🏆 **Win Celebration** - Confetti animation and winner announcement
+- 📱 **Mobile Optimized** - Touch-friendly interface, responsive design
+
+## 🚀 Quick Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/escalero-app)
+
+### Manual Deployment:
+
+1. **Create Project**:
+   ```bash
+   npx create-next-app@latest escalero-app --typescript --tailwind --eslint --app
+   cd escalero-app
+   ```
+
+2. **Replace Files**:
+   - Copy all files from this artifact into your project
+   - Install dependencies: `npm install lucide-react`
+
+3. **Deploy to Vercel**:
+   ```bash
+   npm install -g vercel
+   vercel
+   ```
+
+4. **Or use Vercel Dashboard**:
+   - Connect your GitHub repository
+   - Deploy automatically
+
+## 🎯 Game Rules
+
+### Number Scoring:
+- **9**: 1 point × count (0-5 dice)
+- **10**: 2 points × count (0-5 dice)  
+- **Jack**: 3 points × count (0-5 dice)
+- **Queen**: 4 points × count (0-5 dice)
+- **King**: 5 points × count (0-5 dice)
+- **Ace**: 6 points × count (0-5 dice)
+
+### Special Combinations:
+- **Straight**: Normal 20pts | Served 25pts
+- **Full House**: Normal 30pts | Served 35pts  
+- **Poker**: Normal 40pts | Served 45pts
+- **Grande**: Normal 50pts | Served 80pts
+
+## 🛠️ Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📱 PWA Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Android:
+1. Open app in Chrome
+2. Tap "Install app" banner
+3. Or use browser menu → "Add to Home Screen"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### iOS:
+1. Open app in Safari
+2. Tap Share button → "Add to Home Screen"
+3. Confirm installation
 
-## Learn More
+## 🎨 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 14 with App Router
+- **UI**: React 18 + TypeScript
+- **Styling**: Tailwind CSS with custom animations
+- **Icons**: Lucide React
+- **PWA**: Web App Manifest + Service Worker ready
+- **Deployment**: Optimized for Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+escalero-app/
+├── app/
+│   ├── globals.css          # Global styles + Tailwind
+│   ├── layout.tsx           # Root layout with PWA meta
+│   └── page.tsx             # Main game component
+├── public/
+│   ├── manifest.json        # PWA manifest
+│   ├── icon-192x192.png     # App icons
+│   └── icon-512x512.png
+├── next.config.js           # Next.js configuration
+├── tailwind.config.js       # Tailwind + animations
+├── postcss.config.js        # PostCSS setup
+└── package.json             # Dependencies
+```
 
-## Deploy on Vercel
+## 🔧 Configuration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app is pre-configured for optimal Vercel deployment with:
+- Automatic PWA optimization
+- Image optimization
+- Security headers
+- TypeScript support
+- ESLint configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+MIT License - feel free to use for personal or commercial projects.
+
+---
+
+**Ready to deploy?** Just push to GitHub and connect with Vercel! 🚀
