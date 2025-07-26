@@ -984,67 +984,69 @@ export default function EscaleroApp() {
 
         {/* Game Table */}
         <div className="p-2 overflow-x-auto">
-          <div className="flex gap-1 min-w-fit">
-            {/* Categories Column */}
-            <div className="flex flex-col gap-1">
+          <div className="flex min-w-fit">
+            {/* Categories Column - Sticky */}
+            <div className="flex flex-col gap-1 sticky left-0 z-10">
               {/* Empty header space */}
               <div className="h-16"></div>
               
               {/* Category labels */}
               {categories.map(category => (
                 <div key={category.key} className={`flex items-center justify-center px-2 rounded-lg font-semibold backdrop-blur-md border w-[100px] h-[50px] text-sm ${
-                  isDarkMode ? 'bg-white/10 border-white/20 text-white' : 'bg-black/10 border-black/20 text-gray-800'
+                  isDarkMode ? 'bg-gray-900/95 border-white/20 text-white' : 'bg-gray-100/95 border-black/20 text-gray-800'
                 }`}>
                   {category.name}
                 </div>
               ))}
             </div>
 
-            {/* Player Columns */}
-            {currentGame.players.map((player, playerIndex) => (
-              <div key={player.id} className="flex flex-col gap-1">
-                {/* Player Header with Total */}
-                <div className={`text-center backdrop-blur-md rounded-lg p-2 border w-[100px] h-16 flex flex-col items-center justify-center ${
-                  isDarkMode ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
-                }`}>
-                  <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${player.color} mb-1`}></div>
-                  <div className={`font-semibold text-xs ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                    {player.name.length > 8 ? player.name.substring(0, 8) + '...' : player.name}
+            {/* Player Columns - Scrollable */}
+            <div className="flex gap-1 ml-1">
+              {currentGame.players.map((player, playerIndex) => (
+                <div key={player.id} className="flex flex-col gap-1">
+                  {/* Player Header with Total */}
+                  <div className={`text-center backdrop-blur-md rounded-lg p-2 border w-[100px] h-16 flex flex-col items-center justify-center ${
+                    isDarkMode ? 'bg-white/10 border-white/20' : 'bg-black/10 border-black/20'
+                  }`}>
+                    <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${player.color} mb-1`}></div>
+                    <div className={`font-semibold text-xs ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                      {player.name.length > 8 ? player.name.substring(0, 8) + '...' : player.name}
+                    </div>
+                    <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                      <AnimatedCounter value={getPlayerTotal(player)} />
+                    </div>
                   </div>
-                  <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                    <AnimatedCounter value={getPlayerTotal(player)} />
-                  </div>
-                </div>
 
-                {/* Score Cells */}
-                {categories.map(category => (
-                  <button
-                    key={`${category.key}-${player.id}`}
-                    onClick={() => openScoreDialog(category, playerIndex)}
-                    className={`rounded-lg text-center font-semibold backdrop-blur-md border transition-all duration-300 w-[100px] h-[50px] flex items-center justify-center text-sm transform hover:scale-105 ${
-                      scoreAnimation === `${category.key}-${playerIndex}` 
-                        ? `animate-bounce scale-110 ${isDarkMode ? 'bg-blue-400/40 border-blue-300/50' : 'bg-blue-500/40 border-blue-600/50'}`
-                        : ''
-                    } ${
-                      player.scores[category.key] !== null
-                        ? 'bg-green-500/20 border-green-400/30 text-green-400 shadow-lg' 
-                        : isDarkMode 
-                          ? 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20 animate-pulse' 
-                          : 'bg-black/5 border-black/10 text-gray-800 hover:bg-black/10 hover:border-black/20 animate-pulse'
-                    }`}
-                    style={{
-                      animationDuration: player.scores[category.key] === null ? '3s' : 'none'
-                    }}
-                  >
-                    <span className={`transition-all duration-300 ${
-                      scoreAnimation === `${category.key}-${playerIndex}` ? 'scale-125 font-bold' : ''
-                    }`}>
-                      {player.scores[category.key] !== null ? player.scores[category.key] : '\u00A0'}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            ))}
+                  {/* Score Cells */}
+                  {categories.map(category => (
+                    <button
+                      key={`${category.key}-${player.id}`}
+                      onClick={() => openScoreDialog(category, playerIndex)}
+                      className={`rounded-lg text-center font-semibold backdrop-blur-md border transition-all duration-300 w-[100px] h-[50px] flex items-center justify-center text-sm transform hover:scale-105 ${
+                        scoreAnimation === `${category.key}-${playerIndex}` 
+                          ? `animate-bounce scale-110 ${isDarkMode ? 'bg-blue-400/40 border-blue-300/50' : 'bg-blue-500/40 border-blue-600/50'}`
+                          : ''
+                      } ${
+                        player.scores[category.key] !== null
+                          ? 'bg-green-500/20 border-green-400/30 text-green-400 shadow-lg' 
+                          : isDarkMode 
+                            ? 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20 animate-pulse' 
+                            : 'bg-black/5 border-black/10 text-gray-800 hover:bg-black/10 hover:border-black/20 animate-pulse'
+                      }`}
+                      style={{
+                        animationDuration: player.scores[category.key] === null ? '3s' : 'none'
+                      }}
+                    >
+                      <span className={`transition-all duration-300 ${
+                        scoreAnimation === `${category.key}-${playerIndex}` ? 'scale-125 font-bold' : ''
+                      }`}>
+                        {player.scores[category.key] !== null ? player.scores[category.key] : '\u00A0'}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
